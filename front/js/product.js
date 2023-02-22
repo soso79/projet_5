@@ -1,19 +1,16 @@
-const apiUrl = 'http://localhost:3000/api/products';
-const reponse = await fetch(apiUrl);
-const sofa = await reponse.json();
-const article = sofa[0];
-const imageElement = document.createElement("img");
-imageElement.src = article.image;
-const nomElement = document.createElement("h3");
-nomElement.innerText = article.nom;
-const prixElement = document.createElement("p");
-prixElement.innerText = `Prix: ${article.prix} €`;
-const categorieElement = document.createElement("p");
-categorieElement.innerText = article.categorie;
+fetch(`http://localhost:3000/api/products/${productId}`)
+  .then(response => response.json())
+  .then(selectProduct => {
+    console.log(selectProduct);
+    //on crée les constantes 
+    const img = document.createElement("img");
 
-const sectionItems = document.querySelector(".items");
-sectionItems.appendChild(imageElement);
-sectionItems.appendChild(nomElement);
-sectionItems.appendChild(prixElement);
-sectionItems.appendChild(categorieElement);
+    const price = document.createElement("price");
 
+    const color = document.createElement("color");
+
+    const description = document.createElement("description");
+
+    
+
+    })
