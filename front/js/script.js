@@ -11,8 +11,6 @@ fetch("http://localhost:3000/api/products")
 		 sectionItems.appendChild(createLink);
 
 
-
-
 		const createArticle = document.createElement('article');
 		createLink.appendChild(createArticle);
 		
