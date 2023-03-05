@@ -50,6 +50,8 @@ const getKanap = () => {
 
 }
 
+
+
 //ici on crée notre panier 
 const addToCart = document.getElementById("addToCart")
 addToCart.addEventListener("click", () =>{
@@ -64,6 +66,8 @@ console.log(addKanap)
 // avoir , pour l instant ça ne revient pas a zéro
 document.getElementById('addToCart').textContent = 'Produit ajouté !';
 })
+
+
 
 
 
