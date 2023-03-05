@@ -53,13 +53,15 @@ const getKanap = () => {
 //ici on crée notre panier 
 const addToCart = document.getElementById("addToCart")
 addToCart.addEventListener("click", () =>{
+    
     const addKanap ={
+        
         quantity: document.getElementById("quantity").value,
         couleur: document.getElementById("colors").value,
         id: KanapId
-
+        
     }
-
+console.log(addKanap)
 })
 
 
