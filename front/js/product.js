@@ -55,14 +55,19 @@ const addToCart = document.getElementById("addToCart")
 addToCart.addEventListener("click", () =>{
     
     const addKanap ={
-        
         quantity: document.getElementById("quantity").value,
         couleur: document.getElementById("colors").value,
         id: KanapId
         
     }
 console.log(addKanap)
+// avoir , pour l instant ça ne revient pas a zéro
+document.getElementById('addToCart').textContent = 'Produit ajouté !';
 })
+
+
+
+
 
 
 getKanap()
