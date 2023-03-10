@@ -56,33 +56,34 @@ const getKanap = () => {
 const addToCart = document.getElementById("addToCart")
 addToCart.addEventListener("click", () => {
 
-    const addKanap = {
+    const addProduct = {
         quantity: document.getElementById("quantity").value,
         couleur: document.getElementById("colors").value,
         id: KanapId
 
     }
-    console.log(addKanap)
+    console.log(addProduct)
     // avoir , pour l instant ça ne revient pas a zéro
     document.getElementById('addToCart').textContent = 'Produit ajouté !';
-
-
-
 
     const lStorage = JSON.parse(localStorage.getItem("addToCart"));
     addKanapLocalStorage = []
     console.log(lStorage)
     if (lStorage === null){
         alert("lsvide")
+        addKanapLocalStorage.push(addToCart)
         window.localStorage.setItem("addToCart" , JSON.stringify(addKanapLocalStorage))
         
     //sinon on push les kanap 
     }else{
         alert("ls rempli")
-        addKanapLocalStorage.push(addKanap)
+        addKanapLocalStorage.push(addProduct)
         window.localStorage.setItem("addToCart", JSON.stringify(addKanapLocalStorage))
     
     }
+
+
+    
 
 
 
