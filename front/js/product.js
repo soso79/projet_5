@@ -55,71 +55,26 @@ const getKanap = () => {
 //ici on crée notre panier 
 const panier = document.getElementById("panier");
 panier.addEventListener("click", () => {
-  const addKanap = {
-    quantity: document.getElementById("quantity").value,
-    couleur: document.getElementById("colors").value,
-    id: KanapId 
-  };
-  console.log(addKanap);
+    const addKanap = {
+        quantity: document.getElementById("quantity").value,
+        couleur: document.getElementById("colors").value,
+        id: KanapId // assuming this is defined elsewhere in the code
+    };
+    console.log(addKanap);
 
-  //  confirmation message
-  document.getElementById("panier").textContent = "Produit ajouté !";
+    //  confirmation message
+    document.getElementById("panier").textContent = "Produit ajouté !";
 
-  // Retrieve existing items from local storage
-  let addKanapLocalStorage = JSON.parse(localStorage.getItem("panier")) || [];
+    // Retrieve existing items from local storage
+    let addKanapLocalStorage = JSON.parse(localStorage.getItem("panier")) || [];
 
-  // Add new item to array
-  addKanapLocalStorage.push(addKanap);
+    // Add new item to array
+    addKanapLocalStorage.push(addKanap);
 
-  // Save updated array to local storage
-  localStorage.setItem("panier", JSON.stringify(addKanapLocalStorage));
+    // Save updated array to local storage
+    localStorage.setItem("panier", JSON.stringify(addKanapLocalStorage));
 });
 
-
-
-/*
-const lStorage = JSON.parse(localStorage.getItem("addToCart"));
-    addKanapLocalStorage = []
-    console.log(lStorage)
-    if (lStorage === null){
-        alert("lsvide")
-        addKanapLocalStorage.push(addToCart)
-        window.localStorage.setItem("addToCart" , JSON.stringify(addKanapLocalStorage))
-        
-    //sinon on push les kanap 
-    }else{
-        alert("ls rempli")
-        addKanapLocalStorage.push(addKanap)
-        window.localStorage.setItem("addToCart", JSON.stringify(addKanapLocalStorage))
-    
-    }
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    //ici on definit le tableau dans le localstorage,si le panier n est pas nul on ecrit dans le localstorage en fesant un push
-    addKanapLocalStorage = []
-    if (localStorage.getItem("addToCart") !== null) {
-        addKanapLocalStorage = JSON.parse(localStorage.getItem("addToCart"))
-        addKanapLocalStorage.push(addToCart)
-        localStorage.setItem("addTocart", JSON.stringify(addKanapLocalStorage))
-        //sinon on push les kanap 
-    } else {
-        addKanapLocalStorage.push(addKanap)
-        localStorage.setItem("addToCart", JSON.stringify(addKanapLocalStorage))
-
-    }
-    */
 
 
 
