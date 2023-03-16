@@ -53,41 +53,27 @@ const getKanap = () => {
 
 
 //ici on crée notre panier 
-const addToCart = document.getElementById("addToCart")
-addToCart.addEventListener("click", () => {
+const panier = document.getElementById("panier");
+panier.addEventListener("click", () => {
+  const addKanap = {
+    quantity: document.getElementById("quantity").value,
+    couleur: document.getElementById("colors").value,
+    id: KanapId // assuming this is defined elsewhere in the code
+  };
+  console.log(addKanap);
 
-    const addKanap = {
-        quantity: document.getElementById("quantity").value,
-        couleur: document.getElementById("colors").value,
-        id: KanapId
+  // Display confirmation message
+  document.getElementById("panier").textContent = "Produit ajouté !";
 
-    }
-    console.log(addKanap)
-    // avoir , pour l instant ça ne revient pas a zéro
-    document.getElementById('addToCart').textContent = 'Produit ajouté !';
+  // Retrieve existing items from local storage
+  let addKanapLocalStorage = JSON.parse(localStorage.getItem("panier")) || [];
 
-    const lStorage = JSON.parse(localStorage.getItem("addToCart"));
-    addKanapLocalStorage = []
-    console.log(lStorage)
-    if (lStorage === null){
-        alert("lsvide")
-        
-        localStorage.setItem("addToCart" , JSON.stringify(addKanapLocalStorage))
-        
-    //sinon on push les kanap 
-    }else{
-        alert("ls rempli")
-        addKanapLocalStorage.push(addKanap)
-        localStorage.setItem("addToCart", JSON.stringify(addKanapLocalStorage))
-    
-    }
+  // Add new item to array
+  addKanapLocalStorage.push(addKanap);
 
-
-    
-
-
-
-})
+  // Save updated array to local storage
+  localStorage.setItem("panier", JSON.stringify(addKanapLocalStorage));
+});
 
 
 
