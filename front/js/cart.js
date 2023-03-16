@@ -117,41 +117,41 @@ totalPriceContainer.textContent = totalPrice.toFixed(2) + " €";
 
 
 
-/*
-// Get the cart items container element
-const cartItemsContainer = document.getElementById('cart-items');
+/* A ESSAYER
+const panier = document.getElementById("panier");
+panier.addEventListener("click", () => {
+  const couleur = document.getElementById("colors").value;
+  const quantity = document.getElementById("quantity").value;
+  
+  const addKanap = {
+    quantity: quantity,
+    couleur: couleur,
+    id: KanapId 
+  };
+  
+  console.log(addKanap);
 
-// Get the items from local storage and parse the JSON string
-const cartItems = JSON.parse(localStorage.getItem('panier'));
+  // Retrieve existing items from local storage
+  let addKanapLocalStorage = JSON.parse(localStorage.getItem("panier")) || [];
 
-// Loop through the items array and create HTML elements for each item
-cartItems.forEach(item => {
-  // Create a div element to hold the item details
-  const itemDiv = document.createElement('div');
-  itemDiv.classList.add('cart-items');
+  // Find the item with the same ID, color, and quantity values in the array
+  const existingItem = addKanapLocalStorage.find(item => item.id === KanapId && item.couleur === couleur && item.quantity === quantity);
 
-  // Create an image element for the item
-  const itemImg = document.createElement('img');
-  itemImg.src = item.image;
-  itemImg.alt = item.name;
-  itemDiv.appendChild(itemImg);
+  if (existingItem) {
+    // Item already exists in cart, increment the quantity
+    existingItem.quantity = parseInt(existingItem.quantity) + parseInt(quantity);
+  } else {
+    // Item doesn't exist in cart, add new item to array
+    addKanapLocalStorage.push(addKanap);
+  }
 
-  // Create a p element for the item name
-  const itemName = document.createElement('p');
-  itemName.textContent = item.name;
-  itemDiv.appendChild(itemName);
+  // Save updated array to local storage
+  localStorage.setItem("panier", JSON.stringify(addKanapLocalStorage));
 
-  // Create a p element for the item price
-  const itemPrice = document.createElement('p');
-  itemPrice.textContent = `$${item.price}`;
-  itemDiv.appendChild(itemPrice);
-
-  // Append the item div to the cart items container
-  cartItemsContainer.appendChild(itemDiv);
+  // Show confirmation message
+  document.getElementById("panier").textContent = "Produit ajouté !";
 });
-
-   */ 
-
+*/
 
 
 
