@@ -58,11 +58,11 @@ panier.addEventListener("click", () => {
   const addKanap = {
     quantity: document.getElementById("quantity").value,
     couleur: document.getElementById("colors").value,
-    id: KanapId // assuming this is defined elsewhere in the code
+    id: KanapId 
   };
   console.log(addKanap);
 
-  // Display confirmation message
+  //  confirmation message
   document.getElementById("panier").textContent = "Produit ajouté !";
 
   // Retrieve existing items from local storage
