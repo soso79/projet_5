@@ -1,6 +1,10 @@
 
 
 
+
+
+const cartTotal = document.querySelector('.cart-total');
+
 // Retrieve cart items from local storage
 const cartItems = JSON.parse(localStorage.getItem("panier"));
 
@@ -41,7 +45,7 @@ if (cartItems && cartItems.length > 0) {
     const cartItemsSection = document.getElementById("cart__items");
     cartItemsSection.appendChild(cartItem);
   });
-}
+};
 
 
 
