@@ -1,6 +1,158 @@
 
 
 
+// Retrieve cart items from local storage
+const cartItems = JSON.parse(localStorage.getItem("panier"));
+
+// Check if cart items exist in local storage
+if (cartItems && cartItems.length > 0) {
+  // Loop through each cart item and display it on the page
+  cartItems.forEach((item) => {
+    // Create a new cart item element
+    const cartItem = document.createElement("article");
+    cartItem.classList.add("cart__item");
+    cartItem.setAttribute("data-id", item.id);
+    cartItem.setAttribute("data-color", item.color);
+
+    // Add cart item HTML content
+    cartItem.innerHTML = `
+      <div class="cart__item__img">
+        <img src="${item.img}" alt="${item.name}">
+      </div>
+      <div class="cart__item__content">
+        <div class="cart__item__content__description">
+          <h2>${item.name}</h2>
+          <p>${item.color}</p>
+          <p>${item.price} €</p>
+        </div>
+        <div class="cart__item__content__settings">
+          <div class="cart__item__content__settings__quantity">
+            <p>Qté : </p>
+            <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${item.quantity}">
+          </div>
+          <div class="cart__item__content__settings__delete">
+            <p class="deleteItem">Supprimer</p>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Add cart item to the cart section
+    const cartItemsSection = document.getElementById("cart__items");
+    cartItemsSection.appendChild(cartItem);
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+let productRegisterInLocalStorage = JSON.parse(localStorage.getItem("produit"));
+
 
 // Retrieve the cart items from local storage
 const cartItems = JSON.parse(localStorage.getItem("cartItems"));
@@ -98,7 +250,7 @@ const totalQuantityContainer = document.getElementById("totalQuantity");
 const totalPriceContainer = document.getElementById("totalPrice");
 totalQuantityContainer.textContent = totalQuantity;
 totalPriceContainer.textContent = totalPrice.toFixed(2) + " €";
-
+*/
 
 
 
