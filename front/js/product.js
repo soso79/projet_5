@@ -56,9 +56,11 @@ const getKanap = () => {
 const panier = document.getElementById("panier");
 panier.addEventListener("click", () => {
     const addKanap = {
+        name: document.getElementById("title").value,
         quantity: document.getElementById("quantity").value,
         couleur: document.getElementById("colors").value,
-        id: KanapId // assuming this is defined elsewhere in the code
+        id: KanapId ,// assuming this is defined elsewhere in the code
+        
     };
     console.log(addKanap);
 

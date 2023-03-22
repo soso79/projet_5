@@ -7,32 +7,48 @@ const cartTotal = document.querySelector('.cart-total');
 
 // Retrieve cart items from local storage
 const cartItems = JSON.parse(localStorage.getItem("panier"));
+cartItems.map(product => {
+return fetch(`http://localhost:3000/api/products/${product.id}`)
+.then(function (response) {
+    return response.json()
+
+})
+.then((data) => {
+
+
+
+
+})
+
 
 // Check if cart items exist in local storage
+
 if (cartItems && cartItems.length > 0) {
   // Loop through each cart item and display it on the page
-  cartItems.forEach((item) => {
+  cartItems.map((product) => {
     // Create a new cart item element
     const cartItem = document.createElement("article");
     cartItem.classList.add("cart__item");
-    cartItem.setAttribute("data-id", item.id);
-    cartItem.setAttribute("data-color", item.color);
+    cartItem.setAttribute("data-id", product.id);
+    cartItem.setAttribute("data-color", product.couleur);
+    
+    
 
     // Add cart item HTML content
     cartItem.innerHTML = `
       <div class="cart__item__img">
-        <img src="${item.img}" alt="${item.name}">
+        <img src="${product.img}" alt="${product.name}">
       </div>
       <div class="cart__item__content">
         <div class="cart__item__content__description">
-          <h2>${item.name}</h2>
-          <p>${item.color}</p>
-          <p>${item.price} €</p>
+          <h2>${product.name}</h2>
+          <p>${product.couleur}</p>
+          <p>${product.price} €</p>
         </div>
         <div class="cart__item__content__settings">
           <div class="cart__item__content__settings__quantity">
             <p>Qté : </p>
-            <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${item.quantity}">
+            <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${product.quantity}">
           </div>
           <div class="cart__item__content__settings__delete">
             <p class="deleteItem">Supprimer</p>
@@ -46,6 +62,9 @@ if (cartItems && cartItems.length > 0) {
     cartItemsSection.appendChild(cartItem);
   });
 };
+
+
+
 
 
 
