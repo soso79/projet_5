@@ -13,16 +13,12 @@ return fetch(`http://localhost:3000/api/products/${product.id}`)
     return response.json()
 
 })
-.then((data) => {
-
-
+.then((data) => console.log(data))
 
 
 })
-
-
 // Check if cart items exist in local storage
-
+/*
 if (cartItems && cartItems.length > 0) {
   // Loop through each cart item and display it on the page
   cartItems.map((product) => {
@@ -62,10 +58,7 @@ if (cartItems && cartItems.length > 0) {
     cartItemsSection.appendChild(cartItem);
   });
 };
-
-
-
-
+*/
 
 
 
