@@ -16,9 +16,9 @@ return fetch(`http://localhost:3000/api/products/${product.id}`)
 .then((data) => console.log(data))
 
 
-})
+});
 // Check if cart items exist in local storage
-/*
+
 if (cartItems && cartItems.length > 0) {
   // Loop through each cart item and display it on the page
   cartItems.map((product) => {
@@ -29,11 +29,12 @@ if (cartItems && cartItems.length > 0) {
     cartItem.setAttribute("data-color", product.couleur);
     
     
+    
 
     // Add cart item HTML content
     cartItem.innerHTML = `
       <div class="cart__item__img">
-        <img src="${product.img}" alt="${product.name}">
+        <img src="${product.imageUrl}" alt="${product.name}">
       </div>
       <div class="cart__item__content">
         <div class="cart__item__content__description">
@@ -58,7 +59,7 @@ if (cartItems && cartItems.length > 0) {
     cartItemsSection.appendChild(cartItem);
   });
 };
-*/
+
 
 
 
