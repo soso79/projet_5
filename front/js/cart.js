@@ -1,15 +1,16 @@
 
-const cartTotal = document.querySelector('.cart-total');
+
+
 
 // Retrieve cart items from local storage
 const cartItems = JSON.parse(localStorage.getItem("panier"));
 
 function fetchPanier() {
-cartItems.map(product => {
-return fetch(`http://localhost:3000/api/products/${product.id}`)
-.then((response) => response.json())
-.then((data) => ShowPanier(data, product))
-});
+  cartItems.map(product => {
+    return fetch(`http://localhost:3000/api/products/${product.id}`)
+      .then((response) => response.json())
+      .then((data) => ShowPanier(data, product))
+  });
 }
 
 
@@ -17,15 +18,15 @@ return fetch(`http://localhost:3000/api/products/${product.id}`)
 
 
 function ShowPanier(data, product) {
-if (cartItems && cartItems.length > 0) {
-  // Loop through each cart item and display it on the page
-  
+  if (cartItems && cartItems.length > 0) {
+    // Loop through each cart item and display it on the page
+
     // Create a new cart item element
     const cartItem = document.createElement("article");
     cartItem.classList.add("cart__item");
     cartItem.setAttribute("data-id", product.id);
     cartItem.setAttribute("data-color", product.couleur);
-    
+
     // Add cart item HTML content
     cartItem.innerHTML = `
       <div class="cart__item__img">
@@ -52,8 +53,11 @@ if (cartItems && cartItems.length > 0) {
     // Add cart item to the cart section
     const cartItemsSection = document.getElementById("cart__items");
     cartItemsSection.appendChild(cartItem);
-};
+  };
+
+
 }
+
 fetchPanier();
 
 

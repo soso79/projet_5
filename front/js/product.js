@@ -54,11 +54,13 @@ const getKanap = () => {
 
 //ici on crée notre panier 
 const panier = document.getElementById("panier");
+const total = document.getElementById("total");
 panier.addEventListener("click", () => {
     const addKanap = {
         name: document.getElementById("title").value,
         quantity: parseInt(document.getElementById("quantity").value),
         couleur: document.getElementById("colors").value,
+        price:parseInt(document.getElementById("price").textContent) * parseInt(document.getElementById("quantity").value), // add total price to the item
         id: KanapId ,// assuming this is defined elsewhere in the code
         
     };
@@ -72,7 +74,7 @@ panier.addEventListener("click", () => {
 // Check if item with same ID already exists in array
 let itemExists = false;
 addKanapLocalStorage.forEach(function(item) {
-  if (item.id === addKanap.id) {
+  if (item.id === addKanap.id && item.couleur === addKanap.couleur) {
     // Increment quantity of existing item
     item.quantity += addKanap.quantity;
     itemExists = true;
@@ -87,6 +89,9 @@ if (!itemExists) {
 }
     // Save updated array to local storage
     localStorage.setItem("panier", JSON.stringify(addKanapLocalStorage));
+
+
+    
 });
 
 
