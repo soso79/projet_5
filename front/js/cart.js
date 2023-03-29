@@ -3,22 +3,24 @@
 
 
 // Retrieve cart items from local storage
-const cartItems = JSON.parse(localStorage.getItem("panier"));
+let cartItems = JSON.parse(localStorage.getItem("panier")) || [];
+
 
 function fetchPanier() {
   cartItems.map(product => {
     return fetch(`http://localhost:3000/api/products/${product.id}`)
       .then((response) => response.json())
       .then((data) => ShowPanier(data, product))
+
   });
 }
 
 
-// Check if cart items exist in local storage
-
-
 function ShowPanier(data, product) {
   if (cartItems && cartItems.length > 0) {
+    let totalProduct = product.quantity * data.price;
+    console.log(totalProduct)
+
     // Loop through each cart item and display it on the page
 
     // Create a new cart item element
@@ -53,10 +55,61 @@ function ShowPanier(data, product) {
     // Add cart item to the cart section
     const cartItemsSection = document.getElementById("cart__items");
     cartItemsSection.appendChild(cartItem);
-  };
+
+
+    // Calculer le total et mettre à jour le local storage
+
+    let totalPrice = 0;
+    cartItems.forEach(function (item) {
+      item.price = parseInt(item.price); // convertir le prix en nombre
+      totalPrice += item.price * item.quantity;
+    });
+    localStorage.setItem("panier", JSON.stringify(cartItems));
+
+    // Afficher le total dans le DOM
+    const total = document.getElementById("total");
+    total.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
+  }
+
 
 
 }
+/*
+function updateTotal() {
+
+  let totalPrice = 0;
+  ShowPanier.forEach(function(item) {
+    item.price = parseInt(item.price); // convertir le prix en nombre
+    console.log(item.price)
+    item.quantity = parseInt(item.quantity); // convertir la quantité en nombre
+    console.log(item.quantity)
+    totalPrice += item.price * item.quantity;
+  });
+  sh.setItem("panier", JSON.stringify(addKanapLocalStorage));
+  total.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
+  
+
+  }
+
+*/
+
+
+
+
+
+/*
+function updateTotal() {
+for(a=0; a< cartItems.length; a++){
+  console.log(cartItems[a]);
+  let total = cartItems[a].quantity * item.price;
+}
+
+
+
+
+  
+}
+*/
 
 fetchPanier();
 
@@ -73,14 +126,24 @@ fetchPanier();
 
 
 
+/*
 
 
 
+let totalPrice = 0;
+  ShowPanier.forEach(function(item) {
+    item.price = parseInt(item.price); // convertir le prix en nombre
+    console.log(item.price)
+    item.quantity = parseInt(item.quantity); // convertir la quantité en nombre
+    console.log(item.quantity)
+    totalPrice += item.price * item.quantity;
+  });
+  localStorage.setItem("panier", JSON.stringify(addKanapLocalStorage));
+  total.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
 
 
 
-
-
+*/
 
 
 
