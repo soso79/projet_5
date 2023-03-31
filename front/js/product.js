@@ -62,6 +62,12 @@ panier.addEventListener("click", () => {
         return; // arrête l'exécution de la fonction et empêche l'ajout au panier
     }
 
+    const couleur = document.getElementById("colors").value;
+    if (!couleur) {
+        alert("Veuillez sélectionner une couleur !");
+        return; // arrête l'exécution de la fonction et empêche l'ajout au panier
+    }
+
 
     const addKanap = {
         name: document.getElementById("title").value,
