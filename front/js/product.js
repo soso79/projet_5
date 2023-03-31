@@ -61,6 +61,10 @@ panier.addEventListener("click", () => {
         alert("La quantité ne peut pas être égale à 0 !");
         return; // arrête l'exécution de la fonction et empêche l'ajout au panier
     }
+    if (quantity < 1 || quantity > 100) {
+        alert("La quantité doit être comprise entre 1 et 100.");
+        return; // arrête l'exécution de la fonction et empêche l'ajout au panier
+    }
 
     const couleur = document.getElementById("colors").value;
     if (!couleur) {
