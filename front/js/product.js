@@ -55,6 +55,14 @@ const getKanap = () => {
 //ici on crée notre panier 
 const panier = document.getElementById("panier");
 panier.addEventListener("click", () => {
+
+    const quantity = parseInt(document.getElementById("quantity").value);
+    if (quantity === 0) {
+        alert("La quantité ne peut pas être égale à 0 !");
+        return; // arrête l'exécution de la fonction et empêche l'ajout au panier
+    }
+
+
     const addKanap = {
         name: document.getElementById("title").value,
         quantity: parseInt(document.getElementById("quantity").value),
