@@ -87,6 +87,16 @@ panier.addEventListener("click", () => {
 
     // Retrieve existing items from local storage
     let addKanapLocalStorage = JSON.parse(localStorage.getItem("panier")) || [];
+
+// Calculate total quantity of items in cart
+let totalQuantity = addKanapLocalStorage.reduce((acc, item) => acc + item.quantity, 0);
+    
+// Check if adding new item will exceed total quantity limit
+if (totalQuantity + addKanap.quantity > 100) {
+    alert("Le total des produits ajoutés ne peut pas dépasser 100 !");
+    return; // arrête l'exécution de la fonction et empêche l'ajout au panier
+}
+
     
 // Check if item with same ID already exists in array
 let itemExists = false;
