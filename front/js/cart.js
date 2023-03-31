@@ -17,9 +17,11 @@ function fetchPanier() {
 
 
 function ShowPanier(data, product) {
+  
   if (cartItems && cartItems.length > 0) {
+    /*
     let totalProduct = product.quantity * data.price;
-    console.log(totalProduct)
+    console.log(totalProduct)*/
 
     // Loop through each cart item and display it on the page
 
@@ -28,6 +30,10 @@ function ShowPanier(data, product) {
     cartItem.classList.add("cart__item");
     cartItem.setAttribute("data-id", product.id);
     cartItem.setAttribute("data-color", product.couleur);
+
+    // Calculate the total price for this product
+  const totalProduct = product.quantity * data.price;
+
 
     // Add cart item HTML content
     cartItem.innerHTML = `
@@ -56,36 +62,30 @@ function ShowPanier(data, product) {
     const cartItemsSection = document.getElementById("cart__items");
     cartItemsSection.appendChild(cartItem);
 
+    // Add the total price for this product to the running total
+  product.price = parseInt(product.price); // convert the price to a number
+  product.totalPrice = totalProduct;
+}
+
 
     // Calculer le total et mettre à jour le local storage
 
     let totalPrice = 0;
     cartItems.forEach(function (item) {
-      item.price = parseInt(item.price); // convertir le prix en nombre
-      totalPrice += item.price * item.quantity;
+      totalPrice += item.totalPrice;
+     /* item.price = parseInt(item.price); // convertir le prix en nombre
+      totalPrice += item.price * item.quantity;*/
     });
     localStorage.setItem("panier", JSON.stringify(cartItems));
 
     // Afficher le total dans le DOM
-    const total = document.getElementById("total");
-    total.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
-  }
-
+    const totalElement = document.getElementById("total");
+    totalElement.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
 
 
 }
-
-fetchPanier();
-
-
-
-
-
-
-
-
-
-
+   
+    fetchPanier();
 
 
 
