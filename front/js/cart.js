@@ -74,8 +74,8 @@ function ShowPanier(data, product) {
     product.price = parseInt(product.price); // convert the price to a number
     product.totalPrice = totalProduct;
   }
-// Calculate and update the total
-updateTotal();
+  // Calculate and update the total
+  updateTotal();
 }
 function updateTotal() {
   // Calculer le total et mettre à jour le local storage
@@ -87,7 +87,7 @@ function updateTotal() {
      totalPrice += item.price * item.quantity;*/
   });
 
-  localStorage.setItem("panier", JSON.stringify(cartItems));
+
 
   // Afficher le total dans le DOM
   const totalElement = document.getElementById("total");
@@ -111,7 +111,8 @@ function deleteCartItem(cartItem) {
   // Recalculate the total and update local storage and DOM
   updateTotal();
 
-
+  // Update the cart items in local storage
+  localStorage.setItem("panier", JSON.stringify(cartItems));
 
 }
 
