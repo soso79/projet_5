@@ -87,7 +87,7 @@ function updateTotal() {
      totalPrice += item.price * item.quantity;*/
   });
 
-  localStorage.setItem("panier", JSON.stringify(cartItems));
+  
 
   // Afficher le total dans le DOM
   const totalElement = document.getElementById("total");
