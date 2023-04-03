@@ -74,8 +74,8 @@ function ShowPanier(data, product) {
     product.price = parseInt(product.price); // convert the price to a number
     product.totalPrice = totalProduct;
   }
-  // Calculate and update the total
-  updateTotal();
+// Calculate and update the total
+updateTotal();
 }
 function updateTotal() {
   // Calculer le total et mettre à jour le local storage
@@ -88,7 +88,6 @@ function updateTotal() {
   });
 
   
-
   // Afficher le total dans le DOM
   const totalElement = document.getElementById("total");
   totalElement.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
@@ -114,25 +113,6 @@ function deleteCartItem(cartItem) {
 
 
 }
-const orderForm = document.querySelector('.cart__order__form');
-
-orderForm.addEventListener('submit', (event) => {
-  // Empêche le formulaire de se soumettre
-  event.preventDefault();
-
-  // Vérifie que tous les champs sont remplis
-  if (orderForm.checkValidity()) {
-    // Le formulaire est valide, envoyez la commande au serveur
-    // ...
-  } else {
-    // Le formulaire est invalide, affichez un message d'erreur
-    // ...
-  }
-});
-
-// On ajoute l'attribut "required" à chaque champ
-const inputs = orderForm.querySelectorAll('input');
-inputs.forEach(input => input.setAttribute('required', 'true'));
 
 
 fetchPanier();
