@@ -114,6 +114,25 @@ function deleteCartItem(cartItem) {
 
 
 }
+const orderForm = document.querySelector('.cart__order__form');
+
+orderForm.addEventListener('submit', (event) => {
+  // Empêche le formulaire de se soumettre
+  event.preventDefault();
+
+  // Vérifie que tous les champs sont remplis
+  if (orderForm.checkValidity()) {
+    // Le formulaire est valide, envoyez la commande au serveur
+    // ...
+  } else {
+    // Le formulaire est invalide, affichez un message d'erreur
+    // ...
+  }
+});
+
+// On ajoute l'attribut "required" à chaque champ
+const inputs = orderForm.querySelectorAll('input');
+inputs.forEach(input => input.setAttribute('required', 'true'));
 
 
 fetchPanier();
