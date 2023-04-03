@@ -17,7 +17,7 @@ function fetchPanier() {
 
 
 function ShowPanier(data, product) {
-  
+
   if (cartItems && cartItems.length > 0) {
     /*
     let totalProduct = product.quantity * data.price;
@@ -32,7 +32,7 @@ function ShowPanier(data, product) {
     cartItem.setAttribute("data-color", product.couleur);
 
     // Calculate the total price for this product
-  const totalProduct = product.quantity * data.price;
+    const totalProduct = product.quantity * data.price;
 
 
     // Add cart item HTML content
@@ -57,35 +57,66 @@ function ShowPanier(data, product) {
         </div>
       </div>
     `;
+    // Add event listener to delete button
+    const deleteButton = cartItem.querySelector(".deleteItem");
+    deleteButton.addEventListener("click", () => {
+      deleteCartItem(cartItem);
+    });
+
+
+
 
     // Add cart item to the cart section
     const cartItemsSection = document.getElementById("cart__items");
     cartItemsSection.appendChild(cartItem);
 
     // Add the total price for this product to the running total
-  product.price = parseInt(product.price); // convert the price to a number
-  product.totalPrice = totalProduct;
+    product.price = parseInt(product.price); // convert the price to a number
+    product.totalPrice = totalProduct;
+  }
+  // Calculate and update the total
+  updateTotal();
+}
+function updateTotal() {
+  // Calculer le total et mettre à jour le local storage
+
+  let totalPrice = 0;
+  cartItems.forEach(function (item) {
+    totalPrice += item.totalPrice;
+    /* item.price = parseInt(item.price); // convertir le prix en nombre
+     totalPrice += item.price * item.quantity;*/
+  });
+
+  localStorage.setItem("panier", JSON.stringify(cartItems));
+
+  // Afficher le total dans le DOM
+  const totalElement = document.getElementById("total");
+  totalElement.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
+
+
+}
+
+function deleteCartItem(cartItem) {
+  // Get the ID and color of the item to delete
+  const id = cartItem.getAttribute("data-id");
+  const color = cartItem.getAttribute("data-color");
+
+
+  // Remove the item from the cartItems array
+  cartItems = cartItems.filter(item => item.id !== id || item.couleur !== color);
+
+  // Remove the item from the DOM
+  cartItem.remove();
+
+  // Recalculate the total and update local storage and DOM
+  updateTotal();
+
+
+
 }
 
 
-    // Calculer le total et mettre à jour le local storage
-
-    let totalPrice = 0;
-    cartItems.forEach(function (item) {
-      totalPrice += item.totalPrice;
-     /* item.price = parseInt(item.price); // convertir le prix en nombre
-      totalPrice += item.price * item.quantity;*/
-    });
-    localStorage.setItem("panier", JSON.stringify(cartItems));
-
-    // Afficher le total dans le DOM
-    const totalElement = document.getElementById("total");
-    totalElement.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
-
-
-}
-   
-    fetchPanier();
+fetchPanier();
 
 
 
