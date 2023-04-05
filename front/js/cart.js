@@ -62,21 +62,32 @@ function ShowPanier(data, product) {
     let updateInput = cartItem.querySelector(".itemQuantity")
     updateInput.addEventListener("change", () => {
       let newQuantity = parseInt(updateInput.value, 10);
+      let totalPrice = newQuantity * data.price;
+
       product.quantity = newQuantity;
-      product.totalPrice = newQuantity * data.price;
+      product.totalPrice = totalPrice;
 
       // Update the quantity in the cartItems array in local storage
       const index = cartItems.findIndex(item => item.id === product.id && item.couleur === product.couleur);
+      
       if (index !== -1) {
         cartItems[index].quantity = newQuantity;
-        localStorage.setItem("panier", JSON.stringify(cartItems));
+        cartItems[index].totalPrice = totalPrice;
+       
+        
       }
       
-      updateTotal();
+      
+      
 
+      // Recalculate the total and update the DOM
+      updateTotal();
+      localStorage.setItem("panier", JSON.stringify(cartItems));
+      
+      
 
     });
-
+    
 
 
 
