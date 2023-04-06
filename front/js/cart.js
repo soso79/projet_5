@@ -57,8 +57,7 @@ function ShowPanier(data, product) {
         </div>
       </div>
     `;
-
-    //ici on update la quantité et le total en conséquence
+     //ici on update la quantité et le total en conséquence
     let updateInput = cartItem.querySelector(".itemQuantity")
     updateInput.addEventListener("change", () => {
       let newQuantity = parseInt(updateInput.value, 10);
@@ -76,28 +75,26 @@ function ShowPanier(data, product) {
        
         
       }
-      
-      
-      
 
+      
       // Recalculate the total and update the DOM
       updateTotal();
-      localStorage.setItem("panier", JSON.stringify(cartItems));
-      
+
+
+      // Store the updated cartItems array in localStorage
+  const cartItemsForStorage = cartItems.map(item => {
+    return { id: item.id, couleur: item.couleur, quantity: item.quantity }
+  });
+  localStorage.setItem("panier", JSON.stringify(cartItemsForStorage));
       
 
     });
-    
-
-
 
     // Add event listener to delete button
     const deleteButton = cartItem.querySelector(".deleteItem");
     deleteButton.addEventListener("click", () => {
       deleteCartItem(cartItem);
     });
-
-
 
 
     // Add cart item to the cart section
@@ -110,7 +107,9 @@ function ShowPanier(data, product) {
   }
   // Calculate and update the total
   updateTotal();
+
 }
+
 function updateTotal() {
   // Calculer le total et mettre à jour 
 
@@ -126,6 +125,8 @@ function updateTotal() {
   totalElement.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
 
 }
+
+
 
 function deleteCartItem(cartItem) {
   // Get the ID and color of the item to delete
