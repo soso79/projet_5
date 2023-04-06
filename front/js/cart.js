@@ -19,7 +19,11 @@ function fetchPanier() {
 function ShowPanier(data, product) {
 
   if (cartItems && cartItems.length > 0) {
-    
+    /*
+    let totalProduct = product.quantity * data.price;
+    console.log(totalProduct)*/
+
+    // Loop through each cart item and display it on the page
 
     // Create a new cart item element
     const cartItem = document.createElement("article");
@@ -54,13 +58,12 @@ function ShowPanier(data, product) {
       </div>
     `;
      //ici on update la quantité et le total en conséquence
-    let updateInput = cartItem.querySelector(".itemQuantity")
-    updateInput.addEventListener("change", () => {
-      let newQuantity = parseInt(updateInput.value, 10);
+    let quantityInput = cartItem.querySelector(".itemQuantity")
+    quantityInput.addEventListener("change", () => {
+      let newQuantity = parseInt(quantityInput.value);
       let totalPrice = newQuantity * data.price;
 
-      product.quantity = newQuantity;
-      product.totalPrice = totalPrice;
+      
 
       // Update the quantity in the cartItems array in local storage
       const index = cartItems.findIndex(item => item.id === product.id && item.couleur === product.couleur);
@@ -69,28 +72,32 @@ function ShowPanier(data, product) {
         cartItems[index].quantity = newQuantity;
         cartItems[index].totalPrice = totalPrice;
        
+        // Update the quantity in the DOM
+        updateCartItemQuantity(cartItem, newQuantity);
+
+        // Recalculate the total and update the DOM
+        updateTotal();
         
+        // Update the cart items in local storage
+        localStorage.setItem("panier", JSON.stringify(cartItems.map(item => ({id: item.id, couleur: item.couleur, quantity: item.quantity}))));
       }
 
-      
-      // Recalculate the total and update the DOM
-      updateTotal();
+      });
 
 
-      // Store the updated cartItems array in localStorage
-  const cartItemsForStorage = cartItems.map(item => {
-    return { id: item.id, couleur: item.couleur, quantity: item.quantity }
-  });
-  localStorage.setItem("panier", JSON.stringify(cartItemsForStorage));
-      
+    
 
-    });
 
     // Add event listener to delete button
     const deleteButton = cartItem.querySelector(".deleteItem");
     deleteButton.addEventListener("click", () => {
       deleteCartItem(cartItem);
-    });
+    
+    // Update the cart items in local storage
+    localStorage.setItem("panier", JSON.stringify(cartItems.map(item => ({id: item.id, couleur: item.couleur, quantity: item.quantity}))));
+  });
+
+
 
 
     // Add cart item to the cart section
@@ -100,27 +107,15 @@ function ShowPanier(data, product) {
     // Add the total price for this product to the running total
     product.price = parseInt(product.price); // convert the price to a number
     product.totalPrice = totalProduct;
-  }
-  // Calculate and update the total
+    // Calculate and update the total
   updateTotal();
+  }
+  
 
 }
 
-function updateTotal() {
-  // Calculer le total et mettre à jour 
 
-  let totalPrice = 0;
-  cartItems.forEach(function (item) {
-    totalPrice += item.totalPrice;
-    /* item.price = parseInt(item.price); // convertir le prix en nombre
-     totalPrice += item.price * item.quantity;*/
-  });
 
-  // Afficher le total dans le DOM
-  const totalElement = document.getElementById("total");
-  totalElement.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
-
-}
 
 
 
@@ -135,14 +130,31 @@ function deleteCartItem(cartItem) {
 
   // Remove the item from the DOM
   cartItem.remove();
-
   // Recalculate the total and update local storage and DOM
   updateTotal();
 
-  // Update the cart items in local storage
-  localStorage.setItem("panier", JSON.stringify(cartItems));
+  }
 
-}
+  
+
+  
+function updateCartItemQuantity(cartItem, quantity) {
+  const quantityInput = cartItem.querySelector(".itemQuantity");
+  quantityInput.value = quantity;
+  }
+  
+  function updateTotal() {
+  let totalPrice = 0;
+  
+  // Calculate the total price for all cart items
+  cartItems.forEach(item => {
+  totalPrice += item.totalPrice;
+  });
+  
+  // Display the total price in the DOM
+  const totalElement = document.getElementById("total");
+  totalElement.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
+  }
 
 
 
