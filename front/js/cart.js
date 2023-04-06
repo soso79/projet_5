@@ -156,6 +156,7 @@ function updateTotal() {
   totalElement.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
 }
 
+
 fetchPanier();
 
 
