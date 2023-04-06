@@ -19,11 +19,7 @@ function fetchPanier() {
 function ShowPanier(data, product) {
 
   if (cartItems && cartItems.length > 0) {
-    /*
-    let totalProduct = product.quantity * data.price;
-    console.log(totalProduct)*/
-
-    // Loop through each cart item and display it on the page
+    
 
     // Create a new cart item element
     const cartItem = document.createElement("article");
