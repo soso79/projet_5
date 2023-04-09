@@ -63,7 +63,18 @@ function ShowPanier(data, product) {
       let newQuantity = parseInt(quantityInput.value);
       let totalPrice = newQuantity * data.price;
 
-
+      // Check if the total quantity of products in the cart is between 1 and 100
+      let totalQuantity = 0;
+      cartItems.forEach((item) => {
+        totalQuantity += item.quantity;
+      });
+      totalQuantity -= product.quantity;
+      totalQuantity += newQuantity;
+      if (totalQuantity < 1 || totalQuantity > 100) {
+        quantityInput.value = product.quantity;
+        alert("La quantité totale des produits dans le panier doit être comprise entre 1 et 100.");
+        return;
+      }
 
       // Update the quantity in the cartItems array in local storage
       const index = cartItems.findIndex(item => item.id === product.id && item.couleur === product.couleur);
@@ -85,9 +96,6 @@ function ShowPanier(data, product) {
     });
 
 
-
-
-
     // Add event listener to delete button
     const deleteButton = cartItem.querySelector(".deleteItem");
     deleteButton.addEventListener("click", () => {
@@ -96,9 +104,6 @@ function ShowPanier(data, product) {
       // Update the cart items in local storage
       localStorage.setItem("panier", JSON.stringify(cartItems.map(item => ({ id: item.id, couleur: item.couleur, quantity: item.quantity }))));
     });
-
-
-
 
     // Add cart item to the cart section
     const cartItemsSection = document.getElementById("cart__items");
@@ -111,19 +116,12 @@ function ShowPanier(data, product) {
     updateTotal();
   }
 
-
 }
-
-
-
-
-
 
 function deleteCartItem(cartItem) {
   // Get the ID and color of the item to delete
   const id = cartItem.getAttribute("data-id");
   const color = cartItem.getAttribute("data-color");
-
 
   // Remove the item from the cartItems array
   cartItems = cartItems.filter(item => item.id !== id || item.couleur !== color);
@@ -134,9 +132,6 @@ function deleteCartItem(cartItem) {
   updateTotal();
 
 }
-
-
-
 
 function updateCartItemQuantity(cartItem, quantity) {
   const quantityInput = cartItem.querySelector(".itemQuantity");
