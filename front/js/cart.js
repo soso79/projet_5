@@ -88,9 +88,10 @@ function ShowPanier(data, product) {
 
         // Recalculate the total and update the DOM
         updateTotal();
-
+        let mapping = (cartItems.map(item => ({ id: item.id, couleur: item.couleur, quantity: item.quantity })))
         // Update the cart items in local storage
-        localStorage.setItem("panier", JSON.stringify(cartItems.map(item => ({ id: item.id, couleur: item.couleur, quantity: item.quantity }))));
+        localStorage.setItem("panier", JSON.stringify(mapping)
+        );
       }
 
     });
@@ -150,6 +151,32 @@ function updateTotal() {
   const totalElement = document.getElementById("total");
   totalElement.textContent = `Total : ${totalPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" })}`;
 }
+document.querySelector("#order").addEventListener("click", function (event) {
+  event.preventDefault();
+  const inputForm = {
+    firstName: document.querySelector("#firstName").value,
+    lastName: document.querySelector("#lastName").value
+  }
+  function testFirstName() {
+    let firstNameTest = new RegExp(/^[A-Za-z][A-Za-z' -]*$/);
+    console.log(firstNameTest.test(inputForm.firstName))
+    if (firstNameTest.test(inputForm.firstName)) {
+      document.getElementById("firstNameErrorMsg").textContent = "ok"
+      return true
+
+
+
+    } else {
+      document.getElementById("firstNameErrorMsg").textContent = "veuillez remplir correctement le champs"
+      return false
+
+    }
+
+
+  }
+
+  testFirstName();
+})
 
 
 fetchPanier();
