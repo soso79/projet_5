@@ -103,7 +103,10 @@ function ShowPanier(data, product) {
       deleteCartItem(cartItem);
 
       // Update the cart items in local storage
-      localStorage.setItem("panier", JSON.stringify(cartItems.map(item => ({ id: item.id, couleur: item.couleur, quantity: item.quantity }))));
+      let mapping = (cartItems.map(item => ({ id: item.id, couleur: item.couleur, quantity: item.quantity })))
+      // Update the cart items in local storage
+      localStorage.setItem("panier", JSON.stringify(mapping)
+      );
     });
 
     // Add cart item to the cart section
@@ -155,7 +158,10 @@ document.querySelector("#order").addEventListener("click", function (event) {
   event.preventDefault();
   const inputForm = {
     firstName: document.querySelector("#firstName").value,
-    lastName: document.querySelector("#lastName").value
+    lastName: document.querySelector("#lastName").value,
+    address: document.querySelector("#address").value,
+    city: document.querySelector("#city").value,
+    email: document.querySelector("#email").value
   }
   function testFirstName() {
     let firstNameTest = new RegExp(/^[A-Za-z][A-Za-z' -]*$/);
@@ -164,19 +170,86 @@ document.querySelector("#order").addEventListener("click", function (event) {
       document.getElementById("firstNameErrorMsg").textContent = "ok"
       return true
 
-
-
     } else {
       document.getElementById("firstNameErrorMsg").textContent = "veuillez remplir correctement le champs"
       return false
 
     }
 
+  } 
 
-  }
+  
+  function testLastName() {
+    let lastNameTest = new RegExp(/^[A-Z][a-z]*([- ][A-Z][a-z]*)?$/);
+    console.log(lastNameTest.test(inputForm.lastName))
+    if (lastNameTest.test(inputForm.lastName)) {
+      document.getElementById("lastNameErrorMsg").textContent = "ok"
+      return true
 
-  testFirstName();
-})
+    } else {
+      document.getElementById("lastNameErrorMsg").textContent = "veuillez remplir correctement le champs"
+      return false
+
+    }
+
+  } 
+
+
+  function testAddress() {
+    let addressTest = new RegExp(/^[A-Za-z0-9][A-Za-z0-9' -]*$/);
+    
+    console.log(addressTest.test(inputForm.address))
+    if (addressTest.test(inputForm.address)) {
+      document.getElementById("addressErrorMsg").textContent = "ok"
+      return true
+
+    } else {
+      document.getElementById("addressErrorMsg").textContent = "veuillez remplir correctement le champs"
+      return false
+
+    }
+
+  } 
+
+  function testCity() {
+    let cityTest = new RegExp(/^[A-Za-z][A-Za-z' -]*$/);
+    
+    if (cityTest.test(inputForm.city)) {
+      document.getElementById("cityErrorMsg").textContent = "ok"
+      return true
+
+    } else {
+      document.getElementById("cityErrorMsg").textContent = "veuillez remplir correctement le champs"
+      return false
+
+    }
+
+  } 
+
+  function testEmail() {
+    let emailTest = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
+    console.log(emailTest.test(inputForm.email))
+    if (emailTest.test(inputForm.email)) {
+      document.getElementById("emailErrorMsg").textContent = "ok"
+      return true
+
+    } else {
+      document.getElementById("emailErrorMsg").textContent = "veuillez remplir correctement le champs"
+      return false
+
+    }
+
+  } 
+
+
+ testFirstName();
+ testLastName();
+ testAddress();
+ testCity();
+ testEmail();
+
+
+});
 
 
 fetchPanier();
