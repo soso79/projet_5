@@ -156,13 +156,56 @@ function updateTotal() {
 }
 document.querySelector("#order").addEventListener("click", function (event) {
   event.preventDefault();
+// Vérifier que le panier contient au moins un produit
+if (cartItems.length === 0) {
+  alert("Votre panier est vide. Veuillez ajouter des produits avant de passer votre commande.");
+  return;
+}
+
+
   const inputForm = {
     firstName: document.querySelector("#firstName").value,
     lastName: document.querySelector("#lastName").value,
     address: document.querySelector("#address").value,
     city: document.querySelector("#city").value,
     email: document.querySelector("#email").value
+  };
+
+ // Vérifier chaque champ du formulaire
+ if (!testFirstName()) {
+  alert("Veuillez remplir correctement le champ 'Prénom'");
+  return;
+}
+if (!testLastName()) {
+  alert("Veuillez remplir correctement le champ 'Nom'");
+  return;
+}
+if (!testAddress()) {
+  alert("Veuillez remplir correctement le champ 'Adresse'");
+  return;
+}
+if (!testCity()) {
+  alert("Veuillez remplir correctement le champ 'Ville'");
+  return;
+}
+if (!testEmail()) {
+  alert("Veuillez remplir correctement le champ 'Email'");
+  return;
+}
+
+
+
+  for (const property in inputForm) {
+    if (inputForm[property] === "") {
+      alert("Veuillez remplir tous les champs du formulaire avant de passer votre commande.");
+      return;
+    }
   }
+
+
+
+
+
   function testFirstName() {
     let firstNameTest = new RegExp(/^[A-Za-z][A-Za-z' -]*$/);
     console.log(firstNameTest.test(inputForm.firstName))
