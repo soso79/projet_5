@@ -248,6 +248,22 @@ document.querySelector("#order").addEventListener("click", function (event) {
  testCity();
  testEmail();
 
+// Envoi de la commande à l'API
+const requestOptions = {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ contact: inputForm, products: cartItems.map(item => item.id) })
+};
+
+fetch('http://localhost:3000/api/products/order', requestOptions)
+  .then(response => response.json())
+  .then(data => {
+    // Redirection vers la page Confirmation avec l'id de commande dans l'URL
+    window.location.href = `confirmation.html?id=${data.orderId}`;
+  })
+  .catch(error => console.error(error));
+
+
 
 });
 
