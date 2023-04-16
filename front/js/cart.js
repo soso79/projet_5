@@ -194,16 +194,12 @@ if (!testEmail()) {
 }
 
 
-
   for (const property in inputForm) {
     if (inputForm[property] === "") {
       alert("Veuillez remplir tous les champs du formulaire avant de passer votre commande.");
       return;
     }
   }
-
-
-
 
 
   function testFirstName() {
