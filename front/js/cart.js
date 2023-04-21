@@ -156,6 +156,7 @@ function updateTotal() {
 }
 document.querySelector("#order").addEventListener("click", function (event) {
   event.preventDefault();
+  
 // Vérifier que le panier contient au moins un produit
 if (cartItems.length === 0) {
   alert("Votre panier est vide. Veuillez ajouter des produits avant de passer votre commande.");
@@ -170,6 +171,21 @@ if (cartItems.length === 0) {
     city: document.querySelector("#city").value,
     email: document.querySelector("#email").value
   };
+
+
+  const contact = {
+    firstName: inputForm.firstName,
+    lastName: inputForm.lastName,
+    address: inputForm.address,
+    city: inputForm.city,
+    email: inputForm.email
+  };
+
+  const products = cartItems.map(item => item.id);
+
+  // Afficher l'objet contact et le tableau de produits dans la console
+  console.log('Objet contact :', contact);
+  console.log('Tableau de produits :', products);
 
  // Vérifier chaque champ du formulaire
  if (!testFirstName()) {
@@ -192,6 +208,7 @@ if (!testEmail()) {
   alert("Veuillez remplir correctement le champ 'Email'");
   return;
 }
+
 
 
   for (const property in inputForm) {
@@ -287,11 +304,14 @@ if (!testEmail()) {
  testCity();
  testEmail();
 
+ 
+ 
+
 // Envoi de la commande à l'API
 const requestOptions = {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ contact: inputForm, products: cartItems.map(item => item.id) })
+  body: JSON.stringify({ contact: contact, products: products })
 };
 
 fetch('http://localhost:3000/api/products/order', requestOptions)
@@ -310,10 +330,61 @@ fetch('http://localhost:3000/api/products/order', requestOptions)
 fetchPanier();
 
 
+/*
 
 
 
+for (const property in inputForm) {
+  if (inputForm[property] === "") {
+    alert("Veuillez remplir tous les champs du formulaire avant de passer votre commande.");
+    return;
+  }
+}
 
+createOrder();
+});
+
+function createOrder() {
+// récupérer les informations du formulaire
+const firstName = document.getElementById('firstName').value;
+const lastName = document.getElementById('lastName').value;
+const address = document.getElementById('address').value;
+const city = document.getElementById('city').value;
+const email = document.getElementById('email').value;
+
+// créer un objet contact
+const contact = {
+  firstName,
+  lastName,
+  address,
+  city,
+  email
+};
+
+// récupérer les informations de chaque produit dans le panier
+const cartItems = document.querySelectorAll('.cart__item');
+const products = [];
+
+cartItems.forEach(item => {
+  const id = item.dataset.id;
+  const color = item.dataset.color;
+  const quantity = item.querySelector('.itemQuantity').value;
+
+  // ajouter chaque produit au tableau de produits
+  products.push({
+    _id: id,
+    color,
+    quantity
+  });
+});
+
+// créer un objet qui contient le contact et le tableau de produits
+const order = {
+  contact,
+  products
+};
+
+*/
 
 
 
