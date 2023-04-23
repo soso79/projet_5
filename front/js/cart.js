@@ -325,7 +325,8 @@ document.querySelector("#order").addEventListener("click", function (event) {
     .then(data => {
       // Redirection vers la page Confirmation avec l'id de commande dans l'URL
       window.location.href = `confirmation.html?id=${data.orderId}`;
-      console.log("Commande confirmée :", data);
+      // Afficher les produits de la commande dans la console
+      console.table("Produits de la commande :", cartItems);
     })
     .catch(error => console.error(error));
 
