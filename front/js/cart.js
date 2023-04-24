@@ -1,7 +1,4 @@
 
-
-
-
 // Retrieve cart items from local storage
 let cartItems = JSON.parse(localStorage.getItem("panier")) || [];
 
@@ -19,12 +16,7 @@ function fetchPanier() {
 function ShowPanier(data, product) {
 
   if (cartItems && cartItems.length > 0) {
-    /*
-    let totalProduct = product.quantity * data.price;
-    console.log(totalProduct)*/
-
-    // Loop through each cart item and display it on the page
-
+    
     // Create a new cart item element
     const cartItem = document.createElement("article");
     cartItem.classList.add("cart__item");
@@ -57,6 +49,8 @@ function ShowPanier(data, product) {
         </div>
       </div>
     `;
+    
+  
     //ici on update la quantité et le total en conséquence
     let quantityInput = cartItem.querySelector(".itemQuantity")
     quantityInput.addEventListener("change", () => {
@@ -172,6 +166,14 @@ document.querySelector("#order").addEventListener("click", function (event) {
     email: document.querySelector("#email").value
   };
 
+
+  for (const property in inputForm) {
+    if (inputForm[property] === "") {
+      alert("Veuillez remplir tous les champs du formulaire avant de passer votre commande.");
+      return;
+    }
+  }
+
   const contact = {
     firstName: inputForm.firstName,
     lastName: inputForm.lastName,
@@ -211,15 +213,6 @@ document.querySelector("#order").addEventListener("click", function (event) {
     alert("Veuillez remplir correctement le champ 'Email'");
     return;
   }
-
-
-  for (const property in inputForm) {
-    if (inputForm[property] === "") {
-      alert("Veuillez remplir tous les champs du formulaire avant de passer votre commande.");
-      return;
-    }
-  }
-
 
 
 
