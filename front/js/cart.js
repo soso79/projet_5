@@ -172,7 +172,23 @@ document.querySelector("#order").addEventListener("click", function (event) {
     email: document.querySelector("#email").value
   };
 
+  const contact = {
+    firstName: inputForm.firstName,
+    lastName: inputForm.lastName,
+    address: inputForm.address,
+    city: inputForm.city,
+    email: inputForm.email
+  };
 
+   let products = [];
+
+   for (let a = 0; a < cartItems.length; a ++){ 
+    products.push(cartItems[a].id);
+   }
+   console.log(products)
+   //afficher l objet contact et le tableau de produits dans la console 
+   console.log('Objet contact :',contact);
+   console.log('Tableau de produits :', products);
 
   // Vérifier chaque champ du formulaire
   if (!testFirstName()) {
@@ -292,26 +308,19 @@ document.querySelector("#order").addEventListener("click", function (event) {
   testCity();
   testEmail();
 
-  // créer un objet contact
-  const contact = {
-    firstName,
-    lastName,
-    address,
-    city,
-    email
-  }
+  
 
-  // on crée un tableau vide qui va récupérer les articles du panier à envoyer à l'API //
 
-  let products = [];
-  for (let a = 0; a < cartItems.length; a++) {
-    products.push(cartItems[a].id);
-  }
+
+  
 
   let prodContactInfo = {
     products,
     contact
-  }
+  };
+
+  let test = JSON.stringify(prodContactInfo)
+  console.log(test);
 
   // Envoi de la commande à l'API
   const requestOptions = {
@@ -323,10 +332,11 @@ document.querySelector("#order").addEventListener("click", function (event) {
   fetch('http://localhost:3000/api/products/order', requestOptions)
     .then(response => response.json())
     .then(data => {
+      console.log(contact)
+      console.log(products)
       // Redirection vers la page Confirmation avec l'id de commande dans l'URL
       window.location.href = `confirmation.html?id=${data.orderId}`;
-      // Afficher les produits de la commande dans la console
-      console.table("Produits de la commande :", cartItems);
+      
     })
     .catch(error => console.error(error));
 
