@@ -187,7 +187,7 @@ document.querySelector("#order").addEventListener("click", function (event) {
    }
    console.log(products)
    //afficher l objet contact et le tableau de produits dans la console 
-   console.log('Objet contact :',contact);
+   console.log('Objet contact :', contact);
    console.log('Tableau de produits :', products);
 
   // Vérifier chaque champ du formulaire
