@@ -301,11 +301,6 @@ document.querySelector("#order").addEventListener("click", function (event) {
   testCity();
   testEmail();
 
-  
-
-
-
-  
 
   let prodContactInfo = {
     products,
