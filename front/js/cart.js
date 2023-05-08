@@ -217,7 +217,7 @@ document.querySelector("#order").addEventListener("click", function (event) {
 
 
   function testFirstName() {
-    let firstNameTest = new RegExp(/^[A-Za-z][A-Za-z' -]*$/);
+    let firstNameTest = new RegExp(/^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ' -]*$/);
 
     if (firstNameTest.test(inputForm.firstName)) {
       document.getElementById("firstNameErrorMsg").textContent = "ok"
@@ -233,7 +233,7 @@ document.querySelector("#order").addEventListener("click", function (event) {
 
 
   function testLastName() {
-    let lastNameTest = new RegExp(/^[A-Z][a-z]*([- ][A-Z][a-z]*)?$/);
+    let lastNameTest = new RegExp(/^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ' -]*$/);
 
     if (lastNameTest.test(inputForm.lastName)) {
       document.getElementById("lastNameErrorMsg").textContent = "ok"

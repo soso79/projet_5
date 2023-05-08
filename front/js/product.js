@@ -71,7 +71,8 @@ panier.addEventListener("click", () => {
         alert("Veuillez sélectionner une couleur !");
         return; // arrête l'exécution de la fonction et empêche l'ajout au panier
     }
-
+    //confirmation message
+    alert("Produit ajouté !"); // afficher une alerte
 
     const addKanap = {
         name: document.getElementById("title").value,
@@ -81,9 +82,6 @@ panier.addEventListener("click", () => {
         
     };
     console.log(addKanap);
-
-    //  confirmation message
-    document.getElementById("panier").textContent = "Produit ajouté !";
 
     // Retrieve existing items from local storage
     let addKanapLocalStorage = JSON.parse(localStorage.getItem("panier")) || [];
